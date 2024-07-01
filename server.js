@@ -61,31 +61,49 @@ app.get('/collectibles/:num', (req, res) => {
 
 // Q4
 // Query Parameters:
-//Task: Create a route /shoes that filters the list of shoes based on query parameters.
+// Task: Create a route /shoes that filters the list of shoes based on query parameters.
 // min-price: Excludes shoes below this price.
 // max-price: Excludes shoes above this price.
 // type: Shows only shoes of the specified type.
 // No parameters: Responds with the full list of shoes.
 
-// const shoes = [
-//     { name: "Birkenstocks", price: 50, type: "sandal" },
-//     { name: "Air Jordans", price: 500, type: "sneaker" },
-//     { name: "Air Mahomeses", price: 501, type: "sneaker" },
-//     { name: "Utility Boots", price: 20, type: "boot" },
-//     { name: "Velcro Sandals", price: 15, type: "sandal" },
-//     { name: "Jet Boots", price: 1000, type: "boot" },
-//     { name: "Fifty-Inch Heels", price: 175, type: "heel" }
-// ];
+const shoes = [
+    { name: "Birkenstocks", price: 50, type: "sandal" },
+    { name: "Air Jordans", price: 500, type: "sneaker" },
+    { name: "Air Mahomeses", price: 501, type: "sneaker" },
+    { name: "Utility Boots", price: 20, type: "boot" },
+    { name: "Velcro Sandals", price: 15, type: "sandal" },
+    { name: "Jet Boots", price: 1000, type: "boot" },
+    { name: "Fifty-Inch Heels", price: 175, type: "heel" }
+];
 
 // app.get('/shoes', (req, res) => {
-//     res.send(`shoes of a minimum price of 500 are ${req.params.}`)
-//     res.send()
-//     res.send()
-//     res.send()
+//     return res.send(shoes.filter(({price}) => price > req.query.minprice))
 // })
+// //http://localhost:3000/shoes?minprice=50
 
-// localhost:3000/shoes?
+
+
+// app.get('/shoes', (req, res) => {
+//     return res.send(shoes.filter(({price}) => price < req.query.maxprice))     
+// })
+// //http://localhost:3000/shoes?maxprice=700
+
+// app.get('/shoes', (req, res) => {
+//     return res.send(shoes.filter(({type}) => type === req.query.type)) 
+// })
+// //http://localhost:3000/shoes?type=sandal
+
+app.get('/shoes', (req, res) => {
+    return res.send(shoes)
+})
+//http://localhost:3000/shoes
+
 
 app.listen(3000, () =>{
     console.log('Listening on port 3000')
 })
+
+    // result = shoes.filter(({price}) => price > Number(req.params.minprice))
+    // res.send(result)
+    // res.send(shoes)
