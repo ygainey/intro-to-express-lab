@@ -77,22 +77,20 @@ const shoes = [
     { name: "Fifty-Inch Heels", price: 175, type: "heel" }
 ];
 
-// app.get('/shoes', (req, res) => {
-//     return res.send(shoes.filter(({price}) => price > req.query.minprice))
-// })
-// //http://localhost:3000/shoes?minprice=50
+app.get('/shoes', (req, res) => {
+    return res.send(shoes.filter(({price}) => price > req.query.minprice))
+})
+//http://localhost:3000/shoes?minprice=50
 
+app.get('/shoes', (req, res) => {
+    return res.send(shoes.filter(({price}) => price < req.query.maxprice))     
+})
+//http://localhost:3000/shoes?maxprice=700
 
-
-// app.get('/shoes', (req, res) => {
-//     return res.send(shoes.filter(({price}) => price < req.query.maxprice))     
-// })
-// //http://localhost:3000/shoes?maxprice=700
-
-// app.get('/shoes', (req, res) => {
-//     return res.send(shoes.filter(({type}) => type === req.query.type)) 
-// })
-// //http://localhost:3000/shoes?type=sandal
+app.get('/shoes', (req, res) => {
+    return res.send(shoes.filter(({type}) => type === req.query.type)) 
+})
+//http://localhost:3000/shoes?type=sandal
 
 app.get('/shoes', (req, res) => {
     return res.send(shoes)
@@ -100,10 +98,25 @@ app.get('/shoes', (req, res) => {
 //http://localhost:3000/shoes
 
 
+//sams explanation - works for all the conditions
+app.get('/shoes', (req, res) => {
+    const min = req.query['min-price']
+    const max = req.query['max-price']
+    const type = req.query['type']
+
+    const filteredShoes = shoes.filter(shoe =>{
+        if (
+            (!min || min <= shoe.price) &&
+            (!max || max >= shoe.price) &&
+            (!type || type === shoe.type)
+        ){
+            return true
+        }
+    })
+})
+
+
+
 app.listen(3000, () =>{
     console.log('Listening on port 3000')
 })
-
-    // result = shoes.filter(({price}) => price > Number(req.params.minprice))
-    // res.send(result)
-    // res.send(shoes)
